@@ -7,7 +7,6 @@ public class HeadstoneSpawn : MonoBehaviour {
 
     public Object[] headstones;
     private Transform headstoneSpawn;
-    private GameObject hs;
 
 	// Use this for initialization
 	void Start ()
@@ -16,10 +15,7 @@ public class HeadstoneSpawn : MonoBehaviour {
 
         headstones = Resources.LoadAll("HeadStones", typeof(GameObject));
 
-        hs = Instantiate(headstones[Random.Range(0, headstones.Length)], headstoneSpawn.position, headstoneSpawn.rotation) as GameObject;
-
-        hs.transform.parent = this.gameObject.transform;
-        
+        Instantiate(headstones[Random.Range(0, headstones.Length)], headstoneSpawn.position, headstoneSpawn.rotation);
 	}
 	
 }
