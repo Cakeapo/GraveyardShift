@@ -442,15 +442,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff762fe99cfec3499d708a4d5c40d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot: {fileID: 0}
+  graveSpaceX: 0
+  graveSpaceZ: 0
+  spawnChance: 0
   gravebeds: []
   crypts: []
   verts: []
-  gridX: 0
-  sizeX: 0
-  sizeZ: 0
-  madeVerts: 0
-  chosenvert: 0
 --- !u!64 &466102062
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -514,8 +511,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 466102060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.77742285, y: 4.2302036, z: 13.071858}
-  m_LocalScale: {x: 5.132308, y: 1, z: 2.1158528}
+  m_LocalPosition: {x: 0.77742285, y: 4.2302036, z: 9.38}
+  m_LocalScale: {x: 3.447452, y: 0.67171574, z: 1.4212517}
   m_Children: []
   m_Father: {fileID: 1207720546}
   m_RootOrder: 0
@@ -879,15 +876,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff762fe99cfec3499d708a4d5c40d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot: {fileID: 0}
+  graveSpaceX: 0
+  graveSpaceZ: 0
+  spawnChance: 0
   gravebeds: []
   crypts: []
   verts: []
-  gridX: 0
-  sizeX: 0
-  sizeZ: 0
-  madeVerts: 0
-  chosenvert: 0
 --- !u!1 &967133249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,15 +997,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff762fe99cfec3499d708a4d5c40d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot: {fileID: 0}
+  graveSpaceX: 0
+  graveSpaceZ: 0
+  spawnChance: 0
   gravebeds: []
   crypts: []
   verts: []
-  gridX: 0
-  sizeX: 0
-  sizeZ: 0
-  madeVerts: 0
-  chosenvert: 0
 --- !u!64 &1118975702
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1075,8 +1066,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1118975700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.622578, y: 4.2302036, z: -16.028141}
-  m_LocalScale: {x: 2.1019928, y: 1, z: 2.4441383}
+  m_LocalPosition: {x: -9.34, y: 4.2302036, z: -10.78}
+  m_LocalScale: {x: 1.2882683, y: 0.6128795, z: 1.4979622}
   m_Children: []
   m_Father: {fileID: 1207720546}
   m_RootOrder: 2
@@ -1466,15 +1457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff762fe99cfec3499d708a4d5c40d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plot: {fileID: 0}
+  graveSpaceX: 0
+  graveSpaceZ: 0
+  spawnChance: 0
   gravebeds: []
   crypts: []
   verts: []
-  gridX: 0
-  sizeX: 0
-  sizeZ: 0
-  madeVerts: 0
-  chosenvert: 0
 --- !u!64 &1733613444
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1538,8 +1526,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1733613442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.677423, y: 4.2302036, z: -15.928142}
-  m_LocalScale: {x: 2.4404042, y: 1, z: 2.4047885}
+  m_LocalPosition: {x: 9.21, y: 4.2302036, z: -10.94}
+  m_LocalScale: {x: 1.5392516, y: 0.63073635, z: 1.5167875}
   m_Children: []
   m_Father: {fileID: 1207720546}
   m_RootOrder: 1

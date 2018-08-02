@@ -5,34 +5,35 @@ using System.Linq;
 
 public class Generator : MonoBehaviour {
 
-    public Renderer plot;
+    public float graveSpaceX;
+    public float graveSpaceZ;
 
-    //public Vector3[] verts;
+    public int spawnChance;
+
+    private Renderer plot;
+
     public GameObject[] gravebeds;
     public GameObject[] crypts;
 
     public List<Vector3> verts;
 
-    public int gridX;
+    private int gridX;
     private int gridZ;
 
-    public float sizeX;
-    public float sizeZ;
-
-    private float oldX;
-    private float oldZ;
+    private float sizeX;
+    private float sizeZ;
 
     private Vector3 corner;
 
     private Vector3 currentloc;
 
-    public int madeVerts;
+    private int madeVerts;
     private int t = 0;
     private int vertCount;
 
     private int totalpoints;
 
-    public int chosenvert;
+    private int chosenvert;
     
 
     // Use this for initialization
@@ -61,8 +62,8 @@ public class Generator : MonoBehaviour {
         sizeX = plot.bounds.max.x - plot.bounds.min.x; // get the size of the plot
         sizeZ = plot.bounds.max.z - plot.bounds.min.z;
 
-        gridX = Mathf.FloorToInt(transform.localScale.x / .4f); // get the amount of graves that can spawn along X and Z
-        gridZ = Mathf.FloorToInt(transform.localScale.z / .8f);
+        gridX = Mathf.FloorToInt(transform.localScale.x / graveSpaceX); // get the amount of graves that can spawn along X and Z
+        gridZ = Mathf.FloorToInt(transform.localScale.z / graveSpaceZ);
 
         totalpoints = gridX * gridZ; // got total amount of spawn points
 
@@ -129,7 +130,7 @@ public class Generator : MonoBehaviour {
             float rot = Random.Range(-6, 6);
             Quaternion SpawnRot = Quaternion.Euler(0, rot, 0);
 
-            if (chance < 100) // spawn bed if chance is good
+            if (chance < spawnChance) // spawn bed if chance is good
             {
                 GameObject gb = Instantiate(bed, SpawnPos, SpawnRot);
                 gb.transform.parent = this.gameObject.transform;
