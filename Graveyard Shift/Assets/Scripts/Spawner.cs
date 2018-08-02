@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     private Vector3 RandomPos;
 
     public GameObject SpawnObject;
+    public GameObject SpawnParent;
     public int SpawnNumber = 20;
     public int SpawnCount = 0;
 
@@ -27,7 +28,9 @@ public class Spawner : MonoBehaviour
 		if (SpawnCount < SpawnNumber)
         {
             SpawnCount += 1;
-            Instantiate(SpawnObject, RandomPos, Quaternion.identity);
+            GameObject Spawn;
+            Spawn = Instantiate(SpawnObject, RandomPos, Quaternion.identity);
+            Spawn.transform.parent = SpawnParent.transform;
         }
 	}
 }
