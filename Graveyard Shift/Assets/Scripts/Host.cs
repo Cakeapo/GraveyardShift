@@ -5,12 +5,13 @@ using UnityEngine.AI;
 
 public class Host : MonoBehaviour
 {
-    public enum Controller{ Empty, Captured, Player1, Player2, Player3};
+    public enum Controller { Empty, Captured, Player1, Player2, Player3 };
     public Controller ControllerSel;
 
     public float SpeedModifier = 1;
 
     public bool Dead = false;
+    public bool Shovel = false;
     public bool Victory = false;
 
     public int RandomDirection0FB;
@@ -18,27 +19,40 @@ public class Host : MonoBehaviour
 
     private NavMeshAgent Agent;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
         Invoke("NewDestination", Random.Range(1, 2));
         //Invoke("NewDirectionFB", Random.Range(1, 2));
         //Invoke("NewDirectionLR", Random.Range(1, 2));
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (GM.instance.Hosts.Contains(this.gameObject) == false && Dead == false)
         {
             GM.instance.Hosts.Add(this.gameObject);
         }
 
+        if (GM.instance.Detected.Contains(this.gameObject) && Victory)
+        {
+            GM.instance.Detected.Remove(this.gameObject);
+        }
+
         Agent.speed = GM.instance.HostSpeed * 65 * SpeedModifier;
 
         if (ControllerSel == Controller.Captured)
         {
-            //GetComponent<CapsuleCollider>().enabled = false;
+            GameObject CaptureEffect = Instantiate(GM.instance.HostCapture, transform.position, Quaternion.identity);
+            CaptureEffect.transform.LookAt(GM.instance.Keeper.transform.position);
+            if (GM.instance.Detected.Contains(this.gameObject))
+            {
+                GM.instance.Detected.Remove(this.gameObject);
+            }
+            gameObject.SetActive(false);
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<CapsuleCollider>().enabled = false;
             Agent.enabled = false;
             //Dead = false;
             transform.LookAt(GM.instance.Keeper.transform.position);
@@ -47,6 +61,11 @@ public class Host : MonoBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x * 0.99f, transform.localScale.y * 0.99f, transform.localScale.z * 0.99f);
             }
+        }
+
+        if (Dead)
+        {
+            GetComponent<MeshRenderer>().enabled = false;
         }
 
         //NPC AI
@@ -101,6 +120,7 @@ public class Host : MonoBehaviour
         else
         {
             Dead = true;
+            Agent.enabled = false;
             /*
             if (GM.instance.Host1 = this.gameObject)
             {
@@ -117,195 +137,400 @@ public class Host : MonoBehaviour
             */
         }
 
-        //Player 1 Controls
-        if (ControllerSel == Controller.Player1 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostOne)
+        //Keyboard
         {
-            if (GM.instance.Host1 == this.gameObject)
+            /*
+            //Player 1 Controls
+            if (ControllerSel == Controller.Player1 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostOne)
             {
-                if (!Victory &! Dead)
+                if (GM.instance.Host1 == this.gameObject)
                 {
-                    transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (!Victory & !Dead)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, 0);
 
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
-                {
-                    if (Vector3.Distance(GM.instance.Grave1.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
-                    {
-                        Victory = true;
-                        /*
-                        GetComponent<Rigidbody>().useGravity = false;
-                        transform.Translate(Vector3.up * 0.1f);
-                        if (GM.instance.Grave1.transform.localPosition.y > -1)
+                        if (Input.GetKey(KeyCode.W))
                         {
-                            GM.instance.Grave1.transform.Translate(Vector3.down * 0.05f);
+                            transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
                         }
-                        */
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.A))
+                        {
+                            transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.D))
+                        {
+                            transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
+                        }
                     }
-                    else if (GM.instance.Hosts.Count > 3)
-                    {
-                        GM.instance.Host1 = null;
-                        Dead = true;
-                        GetComponent<Renderer>().material = GM.instance.HostMat;
-                    }
-                }
 
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    SpeedModifier = 2;
+                    if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
+                    {
+                        if (Vector3.Distance(GM.instance.Grave1.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
+                        {
+                            if (GM.instance.Detected.Contains(this.gameObject))
+                            {
+                                GM.instance.Detected.Remove(this.gameObject);
+                            }
+                            Victory = true;
+                            //GetComponent<Rigidbody>().useGravity = false;
+                            //transform.Translate(Vector3.up * 0.1f);
+                            //if (GM.instance.Grave1.transform.localPosition.y > -1)
+                            {
+                                //GM.instance.Grave1.transform.Translate(Vector3.down * 0.05f);
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count >= 4)
+                        {
+                            GM.instance.Host1 = null;
+                            Dead = true;
+                            GetComponent<Renderer>().material = GM.instance.HostMat;
+                        }
+                        else if (GM.instance.Hosts.Count == 3)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host1 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                            if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host1 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count == 2)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                                {
+                                    GM.instance.Host1 = null;
+                                    Dead = true;
+                                    GetComponent<Renderer>().material = GM.instance.HostMat;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Input.GetKey(KeyCode.Q))
+                    {
+                        SpeedModifier = 2;
+                    }
+                    else
+                    {
+                        SpeedModifier = 1;
+                    }
                 }
-                else
+                else if (ControllerSel != Controller.Captured)
                 {
-                    SpeedModifier = 1;
+                    ControllerSel = Controller.Empty;
                 }
             }
-            else if (ControllerSel != Controller.Captured)
+
+            //Player 2 Controls
+            if (ControllerSel == Controller.Player2 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostTwo)
             {
-                ControllerSel = Controller.Empty;
+                if (GM.instance.Host2 == this.gameObject)
+                {
+                    if (!Victory & !Dead)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, 0);
+
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.A))
+                        {
+                            transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.D))
+                        {
+                            transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
+                    {
+                        if (Vector3.Distance(GM.instance.Grave2.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
+                        {
+                            if (GM.instance.Detected.Contains(this.gameObject))
+                            {
+                                GM.instance.Detected.Remove(this.gameObject);
+                            }
+                            Victory = true;
+                            
+                            //GetComponent<Rigidbody>().useGravity = false;
+                            //transform.Translate(Vector2.up * 0.1f);
+                            //if (GM.instance.Grave2.transform.localPosition.y > -1)
+                            {
+                                //GM.instance.Grave2.transform.Translate(Vector2.down * 0.05f);
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count >= 4)
+                        {
+                            GM.instance.Host2 = null;
+                            Dead = true;
+                            GetComponent<Renderer>().material = GM.instance.HostMat;
+                        }
+                        else if (GM.instance.Hosts.Count == 3)
+                        {
+                            if (GM.instance.Host1.GetComponent<Host>().Dead || GM.instance.Host1.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host2 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                            if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host2 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count == 2)
+                        {
+                            if (GM.instance.Host1.GetComponent<Host>().Dead || GM.instance.Host1.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                                {
+                                    GM.instance.Host2 = null;
+                                    Dead = true;
+                                    GetComponent<Renderer>().material = GM.instance.HostMat;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Input.GetKey(KeyCode.Q))
+                    {
+                        SpeedModifier = 2;
+                    }
+                    else
+                    {
+                        SpeedModifier = 1;
+                    }
+                }
+                else if (ControllerSel != Controller.Captured)
+                {
+                    ControllerSel = Controller.Empty;
+                }
             }
+
+            //Player 3 Controls
+            if (ControllerSel == Controller.Player3 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostThree)
+            {
+                if (GM.instance.Host3 == this.gameObject)
+                {
+                    if (!Victory & !Dead)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, 0);
+
+                        if (Input.GetKey(KeyCode.W))
+                        {
+                            transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.S))
+                        {
+                            transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.A))
+                        {
+                            transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        if (Input.GetKey(KeyCode.D))
+                        {
+                            transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
+                    {
+                        if (Vector3.Distance(GM.instance.Grave3.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
+                        {
+                            if (GM.instance.Detected.Contains(this.gameObject))
+                            {
+                                GM.instance.Detected.Remove(this.gameObject);
+                            }
+                            Victory = true;
+                            
+                            //GetComponent<Rigidbody>().useGravity = false;
+                            //transform.Translate(Vector3.up * 0.1f);
+                            //if (GM.instance.Grave3.transform.localPosition.y > -1)
+                            {
+                                //GM.instance.Grave3.transform.Translate(Vector3.down * 0.05f);
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count >= 4)
+                        {
+                            GM.instance.Host3 = null;
+                            Dead = true;
+                            GetComponent<Renderer>().material = GM.instance.HostMat;
+                        }
+                        else if (GM.instance.Hosts.Count == 3)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host3 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                            if (GM.instance.Host1.GetComponent<Host>().Dead || GM.instance.Host1.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host3 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count == 2)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                if (GM.instance.Host1.GetComponent<Host>().Dead || GM.instance.Host1.GetComponent<Host>().ControllerSel == Controller.Captured)
+                                {
+                                    GM.instance.Host3 = null;
+                                    Dead = true;
+                                    GetComponent<Renderer>().material = GM.instance.HostMat;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Input.GetKey(KeyCode.Q))
+                    {
+                        SpeedModifier = 2;
+                    }
+                    else
+                    {
+                        SpeedModifier = 1;
+                    }
+                }
+                else if (ControllerSel != Controller.Captured)
+                {
+                    ControllerSel = Controller.Empty;
+                }
+            }
+            */
         }
 
-        //Player 2 Controls
-        if (ControllerSel == Controller.Player2 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostTwo)
+        //Controllers
         {
-            if (GM.instance.Host2 == this.gameObject)
+            //Player 1 Controls
+            if (ControllerSel == Controller.Player1 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostOne)
             {
-                if (!Victory & !Dead)
+                if (GM.instance.Host1 == this.gameObject)
                 {
-                    transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (!Victory & !Dead)
+                    {
+                        transform.localEulerAngles = new Vector3(0, 0, 0);
 
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                }
+                        //print("X " + Input.GetAxis("P1 Horizontal"));
+                        //print("Y " + Input.GetAxis("P1 Vertical"));
 
-                if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
-                {
-                    if (Vector3.Distance(GM.instance.Grave2.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
-                    {
-                        Victory = true;
-                        /*
-                        GetComponent<Rigidbody>().useGravity = false;
-                        transform.Translate(Vector2.up * 0.1f);
-                        if (GM.instance.Grave2.transform.localPosition.y > -1)
+                        //if (Input.GetAxis("Axis 2") < 0f)
+                        if (Input.GetAxis("P1 Vertical") < 0)
                         {
-                            GM.instance.Grave2.transform.Translate(Vector2.down * 0.05f);
+                            transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
                         }
-                        */
-                    }
-                    else if (GM.instance.Hosts.Count > 3)
-                    {
-                        GM.instance.Host2 = null;
-                        Dead = true;
-                        GetComponent<Renderer>().material = GM.instance.HostMat;
-                    }
-                }
-
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    SpeedModifier = 2;
-                }
-                else
-                {
-                    SpeedModifier = 1;
-                }
-            }
-            else if (ControllerSel != Controller.Captured)
-            {
-                ControllerSel = Controller.Empty;
-            }
-        }
-
-        //Player 3 Controls
-        if (ControllerSel == Controller.Player3 && GM.instance.SelectedPlayerSel == GM.SelectedPlayer.HostThree)
-        {
-            if (GM.instance.Host3 == this.gameObject)
-            {
-                if (!Victory & !Dead)
-                {
-                    transform.localEulerAngles = new Vector3(0, 0, 0);
-
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        transform.Translate(Vector3.forward * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.E) || Victory & !Dead)
-                {
-                    if (Vector3.Distance(GM.instance.Grave3.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
-                    {
-                        Victory = true;
-                        /*
-                        GetComponent<Rigidbody>().useGravity = false;
-                        transform.Translate(Vector3.up * 0.1f);
-                        if (GM.instance.Grave3.transform.localPosition.y > -1)
+                        //if (Input.GetAxis("Axis 2") > 0f)
+                        if (Input.GetAxis("P1 Vertical") > 0)
                         {
-                            GM.instance.Grave3.transform.Translate(Vector3.down * 0.05f);
+                            transform.Translate(Vector3.back * GM.instance.HostSpeed * SpeedModifier);
                         }
-                        */
+                        //if (Input.GetAxis("Axis 1") < 0f)
+                        if (Input.GetAxis("P1 Horizontal") < 0)
+                        {
+                            transform.Translate(Vector3.left * GM.instance.HostSpeed * SpeedModifier);
+                        }
+                        //if (Input.GetAxis("Axis 1") > 0f)
+                        if (Input.GetAxis("P1 Horizontal") > 0)
+                        {
+                            transform.Translate(Vector3.right * GM.instance.HostSpeed * SpeedModifier);
+                        }
                     }
-                    else if (GM.instance.Hosts.Count > 3)
+                    
+                    if (Input.GetButtonDown("P1 B") == true)
                     {
-                        GM.instance.Host3 = null;
-                        Dead = true;
-                        GetComponent<Renderer>().material = GM.instance.HostMat;
+                        if (Shovel)
+                        {
+                            if (Vector3.Distance(GM.instance.Grave1.transform.position, transform.position) < GM.instance.DetectionRange || Victory)
+                            {
+                                if (GM.instance.Detected.Contains(this.gameObject))
+                                {
+                                    GM.instance.Detected.Remove(this.gameObject);
+                                }
+                                Victory = true;
+                            }
+                        }
+                        else
+                        {
+                            if (Vector3.Distance(GM.instance.Sheds[0].transform.position, transform.position) < 3 || Victory)
+                            {
+                                Shovel = true;
+                            }
+                        }
+                    }
+
+                    if (Input.GetButtonDown("P1 A") == true & !Dead)
+                    {
+                        if (GM.instance.Hosts.Count >= 4)
+                        {
+                            GM.instance.Host1 = null;
+                            Dead = true;
+                            GetComponent<Renderer>().material = GM.instance.HostMat;
+                        }
+                        else if (GM.instance.Hosts.Count == 3)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host1 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                            if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                GM.instance.Host1 = null;
+                                Dead = true;
+                                GetComponent<Renderer>().material = GM.instance.HostMat;
+                            }
+                        }
+                        else if (GM.instance.Hosts.Count == 2)
+                        {
+                            if (GM.instance.Host2.GetComponent<Host>().Dead || GM.instance.Host2.GetComponent<Host>().ControllerSel == Controller.Captured)
+                            {
+                                if (GM.instance.Host3.GetComponent<Host>().Dead || GM.instance.Host3.GetComponent<Host>().ControllerSel == Controller.Captured)
+                                {
+                                    GM.instance.Host1 = null;
+                                    Dead = true;
+                                    GetComponent<Renderer>().material = GM.instance.HostMat;
+                                }
+                            }
+                        }
+                    }
+
+                    if (Input.GetButton("P1 X") == true)
+                    {
+                        SpeedModifier = 2;
+                    }
+                    else
+                    {
+                        SpeedModifier = 1;
                     }
                 }
-
-                if (Input.GetKey(KeyCode.Q))
+                else if (ControllerSel != Controller.Captured)
                 {
-                    SpeedModifier = 2;
+                    ControllerSel = Controller.Empty;
                 }
-                else
-                {
-                    SpeedModifier = 1;
-                }
-            }
-            else if (ControllerSel != Controller.Captured)
-            {
-                ControllerSel = Controller.Empty;
             }
         }
 
@@ -350,10 +575,10 @@ public class Host : MonoBehaviour
 
     void NewDestination()
     {
-        if (ControllerSel == Controller.Empty &! Dead)
+        if (ControllerSel == Controller.Empty & !Dead)
         {
             float RandomSpeed = Random.Range(0.0f, 1.0f);
-            
+
             if (RandomSpeed < 0.2f)
             {
                 SpeedModifier = 2f;

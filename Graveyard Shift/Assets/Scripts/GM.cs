@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class GM : MonoBehaviour
 {
@@ -21,9 +23,11 @@ public class GM : MonoBehaviour
     public List<GameObject> Hosts;
     public List<GameObject> Graves;
     public List<GameObject> Detected;
+    public List<GameObject> Sheds;
 
     public GameObject Keeper;
 
+    public GameObject HostCapture;
     public GameObject Host1Escape;
     public GameObject Host2Escape;
     public GameObject Host3Escape;
@@ -100,8 +104,10 @@ public class GM : MonoBehaviour
                 if (Host1.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host1.GetComponent<Host>().Dead == false)
                 {
                     Host1.GetComponent<Host>().ControllerSel = Host.Controller.Player1;
+                    Host1.GetComponent<NavMeshAgent>().enabled = false;
+
                 }
-                else if (Host1.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                else// if (Host1.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
                 {
                     GM.instance.Host1 = null;
                 }
@@ -120,8 +126,9 @@ public class GM : MonoBehaviour
                 if (Host2.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host2.GetComponent<Host>().Dead == false)
                 {
                     Host2.GetComponent<Host>().ControllerSel = Host.Controller.Player2;
+                    Host2.GetComponent<NavMeshAgent>().enabled = false;
                 }
-                else if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                else// if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
                 {
                     GM.instance.Host2 = null;
                 }
@@ -137,11 +144,13 @@ public class GM : MonoBehaviour
             if (Host3 == null & !Player3Captured)
             {
                 Host3 = Hosts[Random.Range(0, Hosts.Count)];
+
                 if (Host3.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host3.GetComponent<Host>().Dead == false)
                 {
                     Host3.GetComponent<Host>().ControllerSel = Host.Controller.Player3;
+                    Host3.GetComponent<NavMeshAgent>().enabled = false;
                 }
-                else if (Host1.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                else// if (Host3.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
                 {
                     GM.instance.Host3 = null;
                 }
@@ -291,6 +300,10 @@ public class GM : MonoBehaviour
                     {
                         Player1Victory = true;
                         Instantiate(Host1Escape, Host1.transform.position, Quaternion.identity);
+                        if (Detected.Contains(Host1))
+                        {
+                            Detected.Remove(Host1);
+                        }
                         Host1.SetActive(false);
                         print("Player 1 has escaped!");
                         print("Player 1 has won!");
@@ -311,6 +324,10 @@ public class GM : MonoBehaviour
                     {
                         Player2Victory = true;
                         Instantiate(Host2Escape, Host2.transform.position, Quaternion.identity);
+                        if (Detected.Contains(Host2))
+                        {
+                            Detected.Remove(Host2);
+                        }
                         Host2.SetActive(false);
                         print("Player 2 has escaped!");
                         print("Player 2 has won!");
@@ -331,6 +348,10 @@ public class GM : MonoBehaviour
                     {
                         Player3Victory = true;
                         Instantiate(Host3Escape, Host3.transform.position, Quaternion.identity);
+                        if (Detected.Contains(Host3))
+                        {
+                            Detected.Remove(Host3);
+                        }
                         Host3.SetActive(false);
                         print("Player 3 has escaped!");
                         print("Player 3 has won!");
@@ -344,31 +365,39 @@ public class GM : MonoBehaviour
                 }
             }
 
-            if (Host1.GetComponent<Host>().Dead)
+            if (Host1 != null)
             {
-                if (!Player1Captured)
+                if (Host1.GetComponent<Host>().Dead)
                 {
-                    Player1Captured = true;
-                    print("Player 1 has been captured!");
+                    if (!Player1Captured)
+                    {
+                        Player1Captured = true;
+                        print("Player 1 has been captured!");
+                    }
                 }
             }
-            if (Host2.GetComponent<Host>().Dead)
+            if (Host2 != null)
             {
-                if (!Player2Captured)
+                if (Host2.GetComponent<Host>().Dead)
                 {
-                    Player2Captured = true;
-                    print("Player 2 has been captured!");
+                    if (!Player2Captured)
+                    {
+                        Player2Captured = true;
+                        print("Player 2 has been captured!");
+                    }
                 }
             }
-            if (Host3.GetComponent<Host>().Dead)
+            if (Host3 != null)
             {
-                if (!Player3Captured)
+                if (Host3.GetComponent<Host>().Dead)
                 {
-                    Player3Captured = true;
-                    print("Player 3 has been captured!");
+                    if (!Player3Captured)
+                    {
+                        Player3Captured = true;
+                        print("Player 3 has been captured!");
+                    }
                 }
             }
-
             if (Player1Captured && Player2Captured && Player3Captured)
             {
                 if (!KeeperVictory)
