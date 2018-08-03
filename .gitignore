@@ -33,3 +33,15 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Put Assets in this folder/3D/Other/Castle/obj/Castle\.mb
+
+Put Assets in this folder/3D/Other/Trees/dyingTree01/obj/dyingtree01\.mb
+
+Put Assets in this folder/3D/Other/Trees/dyingTree01/obj/dyingTree_01_v2\.mb
+
+Put Assets in this folder/Enviroment models/Castle/Castle\.mb
+
+Put Assets in this folder/Enviroment models/Dying Tree Variants/dyingtree01\.mb
+
+Put Assets in this folder/Enviroment models/Dying Tree Variants/dyingTree_01_v2\.mb
