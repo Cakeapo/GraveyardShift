@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4760261513200686}
   - component: {fileID: 33169143174686138}
   - component: {fileID: 23255440205100262}
+  - component: {fileID: 65662979605094222}
   m_Layer: 0
   m_Name: Gravestone_04:gravestone_04
   m_TagString: Untagged
@@ -36,6 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4433067762866964}
+  - component: {fileID: 114832407653667170}
+  - component: {fileID: 208728037333421620}
   m_Layer: 0
   m_Name: gravestone_04_low
   m_TagString: Untagged
@@ -112,3 +115,44 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1067141926898236}
   m_Mesh: {fileID: 4300000, guid: cf6e25bc65f01f84cb60d59b8be9f8f8, type: 3}
+--- !u!65 &65662979605094222
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067141926898236}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0036314, y: 1.1168293, z: 0.49901116}
+  m_Center: {x: 0.0009061992, y: 0.55876714, z: 0.0007320568}
+--- !u!114 &114832407653667170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357018391522420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42de8c5c6235b2f42ae5d40bf7d65192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OwnerSel: 0
+  Stone: {fileID: 1067141926898236}
+  Claimed: 0
+--- !u!208 &208728037333421620
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357018391522420}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.3, y: 0.5, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

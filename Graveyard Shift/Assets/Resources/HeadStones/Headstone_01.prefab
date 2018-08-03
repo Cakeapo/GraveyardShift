@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4142329175780920}
   - component: {fileID: 33345761624470670}
   - component: {fileID: 23000038017311824}
+  - component: {fileID: 65321911029890334}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -36,6 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4418995688031264}
+  - component: {fileID: 114059102128209346}
+  - component: {fileID: 208971634680677178}
   m_Layer: 0
   m_Name: Headstone_01
   m_TagString: Untagged
@@ -112,3 +115,44 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1221239729079030}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65321911029890334
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221239729079030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0.000000059604645, z: 0}
+--- !u!114 &114059102128209346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570137684750870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42de8c5c6235b2f42ae5d40bf7d65192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OwnerSel: 0
+  Stone: {fileID: 1221239729079030}
+  Claimed: 0
+--- !u!208 &208971634680677178
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570137684750870}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
