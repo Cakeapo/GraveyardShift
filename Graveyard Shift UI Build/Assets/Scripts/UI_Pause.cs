@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class UI_Pause : MonoBehaviour {
 
-    public GameObject Paused, Controls, Options;
-    public bool IsPaused, InControls, InOptions;
+    public GameObject Paused, Controls, Options, GameOverTest, QuitConfirm;
+    public UI_GameOver GameOver;
+    public bool IsPaused, InControls, InOptions, InQuitConfirm;
 
 	// Use this for initialization
 	void Start () {
-
+        GameOver = GameObject.Find("UI_GameOver_Manager").GetComponent<UI_GameOver>();
         IsPaused = false;
         InControls = false;
         InOptions = false;
+        InQuitConfirm = false;
 	}
 	
 	// Update is called once per frame
@@ -25,9 +27,14 @@ public class UI_Pause : MonoBehaviour {
 
             if (IsPaused == false)
             {
-                Time.timeScale = 0;
-                Paused.SetActive(true);
-                IsPaused = true;
+                if(GameOver.IsGameover == false)
+                {
+                    Time.timeScale = 0;
+                    Paused.SetActive(true);
+                    GameOverTest.SetActive(false);
+                    IsPaused = true;
+                }
+              
             }
             else
             {
@@ -35,9 +42,13 @@ public class UI_Pause : MonoBehaviour {
                 {
                     if (InOptions == false)
                     {
-                        Time.timeScale = 1;
-                        Paused.SetActive(false);
-                        IsPaused = false;
+                        if (InQuitConfirm == false)
+                        {
+                            Time.timeScale = 1;
+                            Paused.SetActive(false);
+                            GameOverTest.SetActive(true);
+                            IsPaused = false;
+                        }
                     }
                 }
              
@@ -61,15 +72,23 @@ public class UI_Pause : MonoBehaviour {
     {
         Controls.SetActive(false);
         Options.SetActive(false);
+        QuitConfirm.SetActive(false);
         Paused.SetActive(true);
         InControls = false;
         InOptions = false;
+        InQuitConfirm = false;
     }
     public void ResumeGame()
     {
         Time.timeScale = 1;
         Paused.SetActive(false);
         IsPaused = false;
+    }
+    public void ConfirmQuit()
+    {
+        QuitConfirm.SetActive(true);
+        Paused.SetActive(false);
+        InQuitConfirm = true;
     }
     public void QuitToMain()
     {

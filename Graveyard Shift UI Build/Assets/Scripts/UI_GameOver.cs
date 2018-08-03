@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UI_GameOver : MonoBehaviour {
 
-    public GameObject GameOver, AnyKey, GameOverAnim;
+    public GameObject GameOver, AnyKey, GameOverAnim, GOTest;
     public bool IsGameover, CanExit;
 
 	// Use this for initialization
@@ -45,6 +45,7 @@ public class UI_GameOver : MonoBehaviour {
     public void GameOverTest()
     {
         GameOver.SetActive(true);
+        GOTest.SetActive(false);
         IsGameover = true;
         GameOverAnim.GetComponent<Animator>().Play("GameOver");
     }
