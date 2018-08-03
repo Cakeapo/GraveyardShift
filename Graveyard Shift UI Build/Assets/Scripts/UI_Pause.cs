@@ -11,7 +11,7 @@ public class UI_Pause : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameOver = GameObject.Find("UI_GameOver_Manager").GetComponent<UI_GameOver>();
+        
         IsPaused = false;
         InControls = false;
         InOptions = false;
@@ -82,6 +82,7 @@ public class UI_Pause : MonoBehaviour {
     {
         Time.timeScale = 1;
         Paused.SetActive(false);
+        GameOverTest.SetActive(true);
         IsPaused = false;
     }
     public void ConfirmQuit()
