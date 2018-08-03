@@ -134,25 +134,28 @@ public class Keeper : MonoBehaviour
                 {
                     if (GM.instance.Detected.Count > 0)
                     {
-                        KeeperLight.GetComponent<Light>().intensity = FlashIntensity;
-                        Flashing = true;
-                        Invoke("Flash", 0.5f);
-                        CurrentCharge = 0;
-
-                        if (GM.instance.Detected[0].GetComponent<Host>().ControllerSel == Host.Controller.Empty)
+                        if (GM.instance.Detected[0].GetComponent<Host>().Victory == false)
                         {
-                            Freeze = true;
-                            Invoke("Unfreeze", FreezeTime);
-                        }
-                        else
-                        {
-                            CurrentCharge = RechargeTime * 0.25f;
-                        }
+                            KeeperLight.GetComponent<Light>().intensity = FlashIntensity;
+                            Flashing = true;
+                            Invoke("Flash", 0.5f);
+                            CurrentCharge = 0;
 
-                        GM.instance.Detected[0].GetComponent<Host>().ControllerSel = Host.Controller.Captured;
-                        GM.instance.Detected[0].GetComponent<Host>().Dead = true;
-                        GM.instance.Hosts.Remove(GM.instance.Detected[0].gameObject);
-                        GM.instance.Detected.Remove(GM.instance.Detected[0].gameObject);
+                            if (GM.instance.Detected[0].GetComponent<Host>().ControllerSel == Host.Controller.Empty)
+                            {
+                                Freeze = true;
+                                Invoke("Unfreeze", FreezeTime);
+                            }
+                            else
+                            {
+                                CurrentCharge = RechargeTime * 0.25f;
+                            }
+
+                            GM.instance.Detected[0].GetComponent<Host>().ControllerSel = Host.Controller.Captured;
+                            GM.instance.Detected[0].GetComponent<Host>().Dead = true;
+                            GM.instance.Hosts.Remove(GM.instance.Detected[0].gameObject);
+                            GM.instance.Detected.Remove(GM.instance.Detected[0].gameObject);
+                        }
                     }
                 }
                 else

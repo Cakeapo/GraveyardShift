@@ -13,16 +13,11 @@ public class Generator : MonoBehaviour {
 
     public List<Vector3> verts;
 
-    public float spaceX;
-    public float spaceZ;
-
-    public int spawnChance;
-
-    private int gridX;
+    public int gridX;
     private int gridZ;
 
-    private float sizeX;
-    private float sizeZ;
+    public float sizeX;
+    public float sizeZ;
 
     private float oldX;
     private float oldZ;
@@ -31,13 +26,13 @@ public class Generator : MonoBehaviour {
 
     private Vector3 currentloc;
 
-    private int madeVerts;
+    public int madeVerts;
     private int t = 0;
     private int vertCount;
 
     private int totalpoints;
 
-    private int chosenvert;
+    public int chosenvert;
     
 
     // Use this for initialization
@@ -66,8 +61,8 @@ public class Generator : MonoBehaviour {
         sizeX = plot.bounds.max.x - plot.bounds.min.x; // get the size of the plot
         sizeZ = plot.bounds.max.z - plot.bounds.min.z;
 
-        gridX = Mathf.FloorToInt(transform.localScale.x / spaceX); // get the amount of graves that can spawn along X and Z
-        gridZ = Mathf.FloorToInt(transform.localScale.z / spaceZ);
+        gridX = Mathf.FloorToInt(transform.localScale.x / .4f); // get the amount of graves that can spawn along X and Z
+        gridZ = Mathf.FloorToInt(transform.localScale.z / .8f);
 
         totalpoints = gridX * gridZ; // got total amount of spawn points
 
@@ -134,7 +129,7 @@ public class Generator : MonoBehaviour {
             float rot = Random.Range(-6, 6);
             Quaternion SpawnRot = Quaternion.Euler(0, rot, 0);
 
-            if (chance < spawnChance) // spawn bed if chance is good
+            if (chance < 100) // spawn bed if chance is good
             {
                 GameObject gb = Instantiate(bed, SpawnPos, SpawnRot);
                 gb.transform.parent = this.gameObject.transform;
