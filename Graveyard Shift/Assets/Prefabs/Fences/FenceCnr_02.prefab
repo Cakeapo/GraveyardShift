@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4941115061897354}
   - component: {fileID: 33193618060407130}
   - component: {fileID: 23442465681487598}
+  - component: {fileID: 208871644023119944}
   m_Layer: 0
   m_Name: FenceCnr_02
   m_TagString: Untagged
@@ -83,3 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1265675508173430}
   m_Mesh: {fileID: 4300000, guid: 2fa700dadc304174fbe90a10cb79e759, type: 3}
+--- !u!208 &208871644023119944
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265675508173430}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 120.062004, y: 105.688, z: 112.30401}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: -119.950005, y: 105.595, z: -52.371002}
+  m_TimeToStationary: 0.5
