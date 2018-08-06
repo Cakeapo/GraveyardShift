@@ -1,0 +1,4 @@
+Walk_Brisk 0-40(39)
+Walk_Lamp 50-114(113)
+Idle_down 120-168(167)
+idle_up 170-218(217)

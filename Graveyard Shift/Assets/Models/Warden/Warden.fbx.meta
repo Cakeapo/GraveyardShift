@@ -1,0 +1,274 @@
+fileFormatVersion: 2
+guid: 86b915580689a574c9405be820197d0c
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: CONTROLERS
+    100002: CTRL_COATTAILS
+    100004: CTRL_COATTAILS1
+    100006: CTRL_COATTAILS2
+    100008: CTRL_COATTAILS3
+    100010: CTRL_COATTAILS4
+    100012: CTRL_COATTAILS5
+    100014: GEO_HAT
+    100016: GEO_LAMP
+    100018: GEO_WARDEN
+    100020: GEOMETRY
+    100022: group1
+    100024: HIPCONTROLLER_01
+    100026: IKFK
+    100028: JNT_COATTAILS
+    100030: JNT_COATTAILS1
+    100032: JNT_COATTAILS2
+    100034: joint1
+    100036: joint12
+    100038: joint13
+    100040: joint14
+    100042: joint15
+    100044: joint16
+    100046: joint17
+    100048: joint18
+    100050: joint2
+    100052: joint20
+    100054: joint21
+    100056: joint22
+    100058: joint24
+    100060: joint26
+    100062: joint26 1
+    100064: joint27
+    100066: joint27 1
+    100068: joint28
+    100070: joint28 1
+    100072: joint29
+    100074: joint29 1
+    100076: joint3
+    100078: joint30
+    100080: joint31
+    100082: joint31 1
+    100084: joint32
+    100086: joint34
+    100088: joint35
+    100090: joint37
+    100092: joint37 1
+    100094: joint38
+    100096: joint38 1
+    100098: joint4
+    100100: joint5
+    100102: joint6
+    100104: LT_ANKLE_01
+    100106: LT_CLAV_01
+    100108: LT_CLAV_01 1
+    100110: LT_ELBOW_01
+    100112: LT_FOOTCONTROLLER_01
+    100114: LT_GROUP_IK
+    100116: LT_IK_SHOULDERSHRUG
+    100118: LT_IKFK_01
+    100120: LT_IKFKARM_01
+    100122: LT_IKFKWRIST_CONTROLLER_01
+    100124: LT_KNEEPOLE_01
+    100126: LT_SHOULDER_01
+    100128: LT_SHOULDER_AREAPLACE
+    100130: LT_WRIST_CONTROLLER_01
+    100132: NBND_PELVIS_01
+    100134: NECK_03
+    100136: nurbsCircle1
+    100138: RIG
+    100140: ROOT_01
+    100142: RT_ANKLE_01
+    100144: RT_CLAV_01
+    100146: RT_CLAV_01 1
+    100148: RT_ELBOW_01
+    100150: RT_FOOTCONTROLLER_01
+    100152: RT_GRP_IK
+    100154: RT_IK_SHOULDERSHRUG
+    100156: RT_IKFK_01
+    100158: RT_IKFKWRIST_CONTROLLER_01
+    100160: RT_KNEEPOLE_01
+    100162: RT_SHOULDER_01
+    100164: RT_SHOULDER_AREAPLACE
+    100166: RT_WRIST_CONTROLLER_01
+    100168: SHOULDER_02
+    100170: SPINE_A
+    100172: WAIST_04
+    100174: //RootNode
+    400000: CONTROLERS
+    400002: CTRL_COATTAILS
+    400004: CTRL_COATTAILS1
+    400006: CTRL_COATTAILS2
+    400008: CTRL_COATTAILS3
+    400010: CTRL_COATTAILS4
+    400012: CTRL_COATTAILS5
+    400014: GEO_HAT
+    400016: GEO_LAMP
+    400018: GEO_WARDEN
+    400020: GEOMETRY
+    400022: group1
+    400024: HIPCONTROLLER_01
+    400026: IKFK
+    400028: JNT_COATTAILS
+    400030: JNT_COATTAILS1
+    400032: JNT_COATTAILS2
+    400034: joint1
+    400036: joint12
+    400038: joint13
+    400040: joint14
+    400042: joint15
+    400044: joint16
+    400046: joint17
+    400048: joint18
+    400050: joint2
+    400052: joint20
+    400054: joint21
+    400056: joint22
+    400058: joint24
+    400060: joint26
+    400062: joint26 1
+    400064: joint27
+    400066: joint27 1
+    400068: joint28
+    400070: joint28 1
+    400072: joint29
+    400074: joint29 1
+    400076: joint3
+    400078: joint30
+    400080: joint31
+    400082: joint31 1
+    400084: joint32
+    400086: joint34
+    400088: joint35
+    400090: joint37
+    400092: joint37 1
+    400094: joint38
+    400096: joint38 1
+    400098: joint4
+    400100: joint5
+    400102: joint6
+    400104: LT_ANKLE_01
+    400106: LT_CLAV_01
+    400108: LT_CLAV_01 1
+    400110: LT_ELBOW_01
+    400112: LT_FOOTCONTROLLER_01
+    400114: LT_GROUP_IK
+    400116: LT_IK_SHOULDERSHRUG
+    400118: LT_IKFK_01
+    400120: LT_IKFKARM_01
+    400122: LT_IKFKWRIST_CONTROLLER_01
+    400124: LT_KNEEPOLE_01
+    400126: LT_SHOULDER_01
+    400128: LT_SHOULDER_AREAPLACE
+    400130: LT_WRIST_CONTROLLER_01
+    400132: NBND_PELVIS_01
+    400134: NECK_03
+    400136: nurbsCircle1
+    400138: RIG
+    400140: ROOT_01
+    400142: RT_ANKLE_01
+    400144: RT_CLAV_01
+    400146: RT_CLAV_01 1
+    400148: RT_ELBOW_01
+    400150: RT_FOOTCONTROLLER_01
+    400152: RT_GRP_IK
+    400154: RT_IK_SHOULDERSHRUG
+    400156: RT_IKFK_01
+    400158: RT_IKFKWRIST_CONTROLLER_01
+    400160: RT_KNEEPOLE_01
+    400162: RT_SHOULDER_01
+    400164: RT_SHOULDER_AREAPLACE
+    400166: RT_WRIST_CONTROLLER_01
+    400168: SHOULDER_02
+    400170: SPINE_A
+    400172: WAIST_04
+    400174: //RootNode
+    2100000: testColor1
+    2100002: testColor3
+    2100004: testColor2
+    2300000: GEO_HAT
+    2300002: GEO_LAMP
+    3300000: GEO_HAT
+    3300002: GEO_LAMP
+    4300000: GEO_WARDEN
+    4300002: GEO_HAT
+    4300004: GEO_LAMP
+    9500000: //RootNode
+    13700000: GEO_WARDEN
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
