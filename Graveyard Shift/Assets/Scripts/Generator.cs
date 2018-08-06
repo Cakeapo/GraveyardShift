@@ -105,7 +105,7 @@ public class Generator : MonoBehaviour {
             }
             float cryptspawnX = verts[chosenvert].x + (verts[chosenvert + 1].x - verts[chosenvert].x) / 2;
             Vector3 cryptspawn = new Vector3(cryptspawnX, verts[chosenvert].y, verts[chosenvert].z);
-            Quaternion SpawnRot = Quaternion.Euler(0, 0, 0);
+            Quaternion SpawnRot = Quaternion.Euler(0, Random.Range(175.0f,185.0f), 0);
             GameObject choseCrypt = Instantiate(crypts[Random.Range(0, crypts.Length)], cryptspawn, SpawnRot);
 
             verts.Remove(verts[chosenvert]);
