@@ -10,8 +10,12 @@ public class Generator : MonoBehaviour {
     //public Vector3[] verts;
     public GameObject[] gravebeds;
     public GameObject[] crypts;
+    public GameObject hedgeCorner;
+    public GameObject hedgeStraight;
+    public List<Transform> hedgeSpawnPoints;
 
     public List<Vector3> verts;
+    public List<Vector3> corners;
 
     public float spaceX;
     public float spaceZ;
@@ -47,13 +51,15 @@ public class Generator : MonoBehaviour {
         gravebeds = Resources.LoadAll<GameObject>("Gravebeds");
         crypts = Resources.LoadAll<GameObject>("Crypts");
 
+        hedgeCorner = Resources.Load<GameObject>("Hedges/Hedge_Corner");
+        hedgeStraight = Resources.Load<GameObject>("Hedges/Hedge_Straight");
+
         BuildVerts();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-
 
     }
 
@@ -105,7 +111,7 @@ public class Generator : MonoBehaviour {
             }
             float cryptspawnX = verts[chosenvert].x + (verts[chosenvert + 1].x - verts[chosenvert].x) / 2;
             Vector3 cryptspawn = new Vector3(cryptspawnX, verts[chosenvert].y, verts[chosenvert].z);
-            Quaternion SpawnRot = Quaternion.Euler(0, Random.Range(175.0f,185.0f), 0);
+            Quaternion SpawnRot = Quaternion.Euler(0, Random.Range(178f,182f), 0);
             GameObject choseCrypt = Instantiate(crypts[Random.Range(0, crypts.Length)], cryptspawn, SpawnRot);
 
             verts.Remove(verts[chosenvert]);
@@ -139,5 +145,51 @@ public class Generator : MonoBehaviour {
                 gb.transform.parent = this.gameObject.transform;
             }
         }
+
+        PlaceHedges();
+    }
+
+    void PlaceHedges()
+    {
+        int rotY = 180;
+
+        Vector3 minC = plot.bounds.min;
+        Vector3 maxC = plot.bounds.max;
+        Vector3 CC = plot.bounds.min;
+        corners.Add(CC);
+        CC = new Vector3(minC.x, minC.y, maxC.z);
+        corners.Add(CC);
+        CC = new Vector3(maxC.x, minC.y, maxC.z);
+        corners.Add(CC);
+        CC = new Vector3(maxC.x, minC.y, minC.z);
+        corners.Add(CC);
+
+        foreach (Vector3 cor in corners)
+        {
+            int chance = Random.Range(0, 100);
+            if (chance < 75)
+            {
+                Quaternion SpawnRot = Quaternion.Euler(0, rotY, 0);
+                GameObject currHedge = Instantiate(hedgeCorner, cor, SpawnRot);
+                currHedge.transform.parent = this.gameObject.transform;
+
+                hedgeSpawnPoints.Add(currHedge.transform.GetChild(1).transform);
+                hedgeSpawnPoints.Add(currHedge.transform.GetChild(2).transform);
+            }
+            rotY += 90;
+        }
+
+        int hedgeAmount = Random.Range(1, 5);
+
+        for (int i = 0; i < hedgeAmount; i++)
+        {
+            int chosenPoint = Random.Range(0, hedgeSpawnPoints.Count);
+
+            GameObject currHedge = Instantiate(hedgeStraight, hedgeSpawnPoints[chosenPoint].position, hedgeSpawnPoints[chosenPoint].rotation);
+            currHedge.transform.parent = this.gameObject.transform;
+
+            hedgeSpawnPoints.Remove(hedgeSpawnPoints[chosenPoint]);
+        }
+
     }
 }
