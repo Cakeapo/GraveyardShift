@@ -1,0 +1,317 @@
+fileFormatVersion: 2
+guid: 4681ffd90b124e047afe675ac5d8df4d
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: back
+    100002: CONTROLERS
+    100004: CTRL_COATTAILS
+    100006: CTRL_COATTAILS1
+    100008: CTRL_COATTAILS2
+    100010: CTRL_COATTAILS3
+    100012: CTRL_COATTAILS4
+    100014: CTRL_COATTAILS5
+    100016: GEO_HAT
+    100018: GEO_LAMP
+    100020: GEO_WARDEN
+    100022: GEOMETRY
+    100024: //RootNode
+    100026: group1
+    100028: HIPCONTROLLER_01
+    100030: IKFK
+    100032: JNT_COATTAILS
+    100034: JNT_COATTAILS1
+    100036: JNT_COATTAILS2
+    100038: joint1
+    100040: joint12
+    100042: joint13
+    100044: joint14
+    100046: joint15
+    100048: joint16
+    100050: joint17
+    100052: joint18
+    100054: joint2
+    100056: joint20
+    100058: joint21
+    100060: joint22
+    100062: joint24
+    100064: joint26
+    100066: joint26 1
+    100068: joint27
+    100070: joint27 1
+    100072: joint28
+    100074: joint28 1
+    100076: joint29
+    100078: joint29 1
+    100080: joint3
+    100082: joint30
+    100084: joint31
+    100086: joint31 1
+    100088: joint32
+    100090: joint34
+    100092: joint35
+    100094: joint37
+    100096: joint37 1
+    100098: joint38
+    100100: joint38 1
+    100102: joint4
+    100104: joint5
+    100106: joint6
+    100108: LT_ANKLE_01
+    100110: LT_CLAV_01
+    100112: LT_CLAV_01 1
+    100114: LT_ELBOW_01
+    100116: LT_FOOTCONTROLLER_01
+    100118: LT_GROUP_IK
+    100120: LT_IK_SHOULDERSHRUG
+    100122: LT_IKFK_01
+    100124: LT_IKFKARM_01
+    100126: LT_IKFKWRIST_CONTROLLER_01
+    100128: LT_KNEEPOLE_01
+    100130: LT_SHOULDER_01
+    100132: LT_SHOULDER_AREAPLACE
+    100134: LT_WRIST_CONTROLLER_01
+    100136: MASTERCONTROLLER
+    100138: NBND_PELVIS_01
+    100140: NECK_03
+    100142: nurbsCircle1
+    100144: RIG
+    100146: ROOT_01
+    100148: RT_ANKLE_01
+    100150: RT_CLAV_01
+    100152: RT_CLAV_01 1
+    100154: RT_ELBOW_01
+    100156: RT_FOOTCONTROLLER_01
+    100158: RT_GRP_IK
+    100160: RT_IK_SHOULDERSHRUG
+    100162: RT_IKFK_01
+    100164: RT_IKFKWRIST_CONTROLLER_01
+    100166: RT_KNEEPOLE_01
+    100168: RT_SHOULDER_01
+    100170: RT_SHOULDER_AREAPLACE
+    100172: RT_WRIST_CONTROLLER_01
+    100174: SHOULDER_02
+    100176: SPINE_A
+    100178: WAIST_04
+    400000: back
+    400002: CONTROLERS
+    400004: CTRL_COATTAILS
+    400006: CTRL_COATTAILS1
+    400008: CTRL_COATTAILS2
+    400010: CTRL_COATTAILS3
+    400012: CTRL_COATTAILS4
+    400014: CTRL_COATTAILS5
+    400016: GEO_HAT
+    400018: GEO_LAMP
+    400020: GEO_WARDEN
+    400022: GEOMETRY
+    400024: //RootNode
+    400026: group1
+    400028: HIPCONTROLLER_01
+    400030: IKFK
+    400032: JNT_COATTAILS
+    400034: JNT_COATTAILS1
+    400036: JNT_COATTAILS2
+    400038: joint1
+    400040: joint12
+    400042: joint13
+    400044: joint14
+    400046: joint15
+    400048: joint16
+    400050: joint17
+    400052: joint18
+    400054: joint2
+    400056: joint20
+    400058: joint21
+    400060: joint22
+    400062: joint24
+    400064: joint26
+    400066: joint26 1
+    400068: joint27
+    400070: joint27 1
+    400072: joint28
+    400074: joint28 1
+    400076: joint29
+    400078: joint29 1
+    400080: joint3
+    400082: joint30
+    400084: joint31
+    400086: joint31 1
+    400088: joint32
+    400090: joint34
+    400092: joint35
+    400094: joint37
+    400096: joint37 1
+    400098: joint38
+    400100: joint38 1
+    400102: joint4
+    400104: joint5
+    400106: joint6
+    400108: LT_ANKLE_01
+    400110: LT_CLAV_01
+    400112: LT_CLAV_01 1
+    400114: LT_ELBOW_01
+    400116: LT_FOOTCONTROLLER_01
+    400118: LT_GROUP_IK
+    400120: LT_IK_SHOULDERSHRUG
+    400122: LT_IKFK_01
+    400124: LT_IKFKARM_01
+    400126: LT_IKFKWRIST_CONTROLLER_01
+    400128: LT_KNEEPOLE_01
+    400130: LT_SHOULDER_01
+    400132: LT_SHOULDER_AREAPLACE
+    400134: LT_WRIST_CONTROLLER_01
+    400136: MASTERCONTROLLER
+    400138: NBND_PELVIS_01
+    400140: NECK_03
+    400142: nurbsCircle1
+    400144: RIG
+    400146: ROOT_01
+    400148: RT_ANKLE_01
+    400150: RT_CLAV_01
+    400152: RT_CLAV_01 1
+    400154: RT_ELBOW_01
+    400156: RT_FOOTCONTROLLER_01
+    400158: RT_GRP_IK
+    400160: RT_IK_SHOULDERSHRUG
+    400162: RT_IKFK_01
+    400164: RT_IKFKWRIST_CONTROLLER_01
+    400166: RT_KNEEPOLE_01
+    400168: RT_SHOULDER_01
+    400170: RT_SHOULDER_AREAPLACE
+    400172: RT_WRIST_CONTROLLER_01
+    400174: SHOULDER_02
+    400176: SPINE_A
+    400178: WAIST_04
+    2000000: back
+    2100000: set_01
+    2100002: mat_warden_Cloth
+    2300000: GEO_HAT
+    2300002: GEO_LAMP
+    3300000: GEO_HAT
+    3300002: GEO_LAMP
+    4300000: GEO_WARDEN
+    4300002: GEO_HAT
+    4300004: GEO_LAMP
+    7400000: Walk Fast
+    9500000: //RootNode
+    13700000: GEO_WARDEN
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_warden_Cloth
+    second: {fileID: 2100000, guid: f9df6d8020272c84fa31151ab9456162, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: set_01
+    second: {fileID: 2100000, guid: 48f56b189e7c482449db97c758853716, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk Fast
+      takeName: Walk_Fast
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
