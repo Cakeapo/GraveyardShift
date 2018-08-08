@@ -168,17 +168,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f194332ea21e642aaee8121d711041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedPlayerSel: 0
+  PlayerCountSel: 0
+  keeperPlayerSel: 0
+  CycleKeeper: 0
   KeeperSpeed: 0.075
   HostSpeed: 0.05
   ColorTest: 1
-  DetectionRange: 5
+  DetectionRange: 2
+  SwitchCooldown: 5
+  InspectTime: 2
+  DigTime: 4
+  Layouts:
+  - {fileID: 1417430419544290, guid: 3970020cd28dfdd469a292ee65c83b4c, type: 2}
   Hosts: []
   Graves: []
   Detected: []
   Sheds: []
+  ActiveLayout: {fileID: 0}
   Keeper: {fileID: 796039502}
-  HostCapture: {fileID: 0}
+  GraveDug: {fileID: 1249113767946808, guid: 62344b189d580a54ea2372c68160fd7c, type: 2}
+  HostCapture: {fileID: 1558209581016472, guid: cf88ee72ec31c2b41a0f383bd828fb30,
+    type: 2}
   Host1Escape: {fileID: 1555032721747230, guid: dcc2068ec8136b04fad672ee5dd247cd,
     type: 2}
   Host2Escape: {fileID: 1067504342945570, guid: 4d0dc433926f8614a9fe6dd16dc9cdf1,
@@ -1971,7 +1981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &466102061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &635626718
 Transform:
   m_ObjectHideFlags: 0
@@ -3236,6 +3246,57 @@ Transform:
   m_Father: {fileID: 1354856760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &709640113
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098822894376708, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567078951682376, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+      propertyPath: m_Name
+      value: Keeper (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 108365886723946802, guid: d317ece97fa0f9c4c834bdac60273677,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d317ece97fa0f9c4c834bdac60273677, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &710582986
 Prefab:
   m_ObjectHideFlags: 0
@@ -5000,7 +5061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1118975701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6453,8 +6514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99e0b7588692bb49b1a5ac162e73ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaMax: {x: 24, y: 1, z: 24}
-  AreaMin: {x: -24, y: 1, z: -24}
+  AreaMax: {x: 14, y: 1, z: 14}
+  AreaMin: {x: -14, y: 1, z: -14}
   SpawnObject: {fileID: 1651927634933052, guid: 4e378ba25b4621943b982e5ca693845f,
     type: 2}
   SpawnParent: {fileID: 1431678676}
@@ -7401,7 +7462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1733613443
 MonoBehaviour:
   m_ObjectHideFlags: 0
