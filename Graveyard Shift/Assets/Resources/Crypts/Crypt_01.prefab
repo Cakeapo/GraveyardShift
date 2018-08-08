@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4987064082376488}
+  - component: {fileID: 114081247187969836}
   m_Layer: 0
   m_Name: Crypt_01
   m_TagString: Untagged
@@ -126,6 +127,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.7886586, y: 5.8902197, z: 5.196737}
   m_Center: {x: 0.00009274482, y: 2.926597, z: -0.7084458}
+--- !u!114 &114081247187969836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424149963380986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbbed7d3ee9ef14e8cbd3a8cf840b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!208 &208328352362310494
 NavMeshObstacle:
   m_ObjectHideFlags: 1

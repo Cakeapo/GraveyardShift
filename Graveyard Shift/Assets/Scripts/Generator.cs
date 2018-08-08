@@ -142,7 +142,7 @@ public class Generator : MonoBehaviour {
             if (chance < spawnChance) // spawn bed if chance is good
             {
                 GameObject gb = Instantiate(bed, SpawnPos, SpawnRot);
-                gb.transform.parent = this.gameObject.transform;
+                //gb.transform.parent = this.gameObject.transform;
             }
         }
 

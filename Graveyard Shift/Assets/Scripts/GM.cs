@@ -8,8 +8,16 @@ public class GM : MonoBehaviour
 {
     public static GM instance = null;
 
-    public enum SelectedPlayer { HostOne, HostTwo, HostThree, Keeper};
-    public SelectedPlayer SelectedPlayerSel;
+    //public enum SelectedPlayer { HostOne, HostTwo, HostThree, Keeper};
+    //public SelectedPlayer SelectedPlayerSel;
+
+    public enum PlayerCount { two, three, four };
+    public PlayerCount PlayerCountSel;
+
+    public enum KeeperPlayer { none, one, two, three, four};
+    public KeeperPlayer keeperPlayerSel;
+
+    public bool CycleKeeper = false;
 
     public float KeeperSpeed = 1;
     public float HostSpeed = 1;
@@ -18,14 +26,23 @@ public class GM : MonoBehaviour
     private float StartDelay = 0.5f;
     private bool Started = false;
 
-    public float DetectionRange = 5;
+    public float DetectionRange = 3;
 
+    public float SwitchCooldown = 5;
+    public float InspectTime = 2;
+    public float DigTime = 4;
+
+    public List<GameObject> Layouts;
     public List<GameObject> Hosts;
     public List<GameObject> Graves;
     public List<GameObject> Detected;
     public List<GameObject> Sheds;
 
+    public GameObject ActiveLayout;
+
     public GameObject Keeper;
+
+    public GameObject GraveDug;
 
     public GameObject HostCapture;
     public GameObject Host1Escape;
@@ -79,6 +96,65 @@ public class GM : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (ActiveLayout == null)
+        {
+            //ActiveLayout = Layouts[Random.Range(0, Layouts.Count)];
+            //ActiveLayout.SetActive(true);
+
+            ActiveLayout = Instantiate(Layouts[Random.Range(0, Layouts.Count)], transform.position, Quaternion.identity);
+        }
+
+        if (keeperPlayerSel == KeeperPlayer.none)
+        {
+            if (Input.GetButtonDown("P1 Start"))
+            {
+                print("Player 1 is the Keeper");
+                keeperPlayerSel = KeeperPlayer.one;
+            }
+            if (Input.GetButtonDown("P2 Start"))
+            {
+                print("Player 2 is the Keeper");
+                keeperPlayerSel = KeeperPlayer.two;
+            }
+            if (Input.GetButtonDown("P3 Start"))
+            {
+                print("Player 3 is the Keeper");
+                keeperPlayerSel = KeeperPlayer.three;
+            }
+            if (Input.GetButtonDown("P4 Start"))
+            {
+                print("Player 4 is the Keeper");
+                keeperPlayerSel = KeeperPlayer.four;
+            }
+        }
+        else if (CycleKeeper)
+        {
+            if (Input.GetButtonDown("P1 Start"))
+            {
+                if (keeperPlayerSel == KeeperPlayer.one)
+                {
+                    print("Player 2 is the Keeper");
+                    keeperPlayerSel = KeeperPlayer.two;
+                }
+                else if (keeperPlayerSel == KeeperPlayer.two)
+                {
+                    print("Player 3 is the Keeper");
+                    keeperPlayerSel = KeeperPlayer.three;
+                }
+                else if (keeperPlayerSel == KeeperPlayer.three)
+                {
+                    print("Player 4 is the Keeper");
+                    keeperPlayerSel = KeeperPlayer.four;
+                }
+                else if (keeperPlayerSel == KeeperPlayer.four)
+                {
+                    print("Player 1 is the Keeper");
+                    keeperPlayerSel = KeeperPlayer.one;
+                }
+            }
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SelectedPlayerSel = SelectedPlayer.HostOne;
@@ -95,6 +171,7 @@ public class GM : MonoBehaviour
         {
             //SelectedPlayerSel = SelectedPlayer.Keeper;
         }
+        */
 
         if (Started && Hosts.Count > 0)
         {
@@ -120,46 +197,52 @@ public class GM : MonoBehaviour
                 }
             }
 
-            if (Host2 == null & !Player2Captured)
+            if (PlayerCountSel != PlayerCount.two)
             {
-                Host2 = Hosts[Random.Range(0, Hosts.Count)];
-                if (Host2.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host2.GetComponent<Host>().Dead == false)
+                if (Host2 == null & !Player2Captured)
                 {
-                    Host2.GetComponent<Host>().ControllerSel = Host.Controller.Player2;
-                    Host2.GetComponent<NavMeshAgent>().enabled = false;
+                    Host2 = Hosts[Random.Range(0, Hosts.Count)];
+                    if (Host2.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host2.GetComponent<Host>().Dead == false)
+                    {
+                        Host2.GetComponent<Host>().ControllerSel = Host.Controller.Player2;
+                        Host2.GetComponent<NavMeshAgent>().enabled = false;
+                    }
+                    else// if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                    {
+                        GM.instance.Host2 = null;
+                    }
                 }
-                else// if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                else
                 {
-                    GM.instance.Host2 = null;
-                }
-            }
-            else
-            {
-                if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Player2)
-                {
-                    //GM.instance.Host2 = null;
+                    if (Host2.GetComponent<Host>().ControllerSel != Host.Controller.Player2)
+                    {
+                        //GM.instance.Host2 = null;
+                    }
                 }
             }
 
-            if (Host3 == null & !Player3Captured)
+            if (PlayerCountSel == PlayerCount.four)
             {
-                Host3 = Hosts[Random.Range(0, Hosts.Count)];
+                if (Host3 == null & !Player3Captured)
+                {
+                    Host3 = Hosts[Random.Range(0, Hosts.Count)];
 
-                if (Host3.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host3.GetComponent<Host>().Dead == false)
-                {
-                    Host3.GetComponent<Host>().ControllerSel = Host.Controller.Player3;
-                    Host3.GetComponent<NavMeshAgent>().enabled = false;
+                    if (Host3.GetComponent<Host>().ControllerSel == Host.Controller.Empty && Host3.GetComponent<Host>().Dead == false)
+                    {
+                        Host3.GetComponent<Host>().ControllerSel = Host.Controller.Player3;
+                        Host3.GetComponent<NavMeshAgent>().enabled = false;
+                    }
+                    else// if (Host3.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                    {
+                        GM.instance.Host3 = null;
+                    }
                 }
-                else// if (Host3.GetComponent<Host>().ControllerSel != Host.Controller.Captured)
+                else
                 {
-                    GM.instance.Host3 = null;
-                }
-            }
-            else
-            {
-                if (Host3.GetComponent<Host>().ControllerSel != Host.Controller.Player3)
-                {
-                    //GM.instance.Host3 = null;
+                    if (Host3.GetComponent<Host>().ControllerSel != Host.Controller.Player3)
+                    {
+                        //GM.instance.Host3 = null;
+                    }
                 }
             }
 
@@ -217,43 +300,49 @@ public class GM : MonoBehaviour
                 }
             }
 
-            if (Grave2 == null)
+            if (PlayerCountSel != PlayerCount.two)
             {
-                Grave2 = Graves[Random.Range(0, Graves.Count)];
-                if (Grave2.GetComponent<Grave>().Claimed == false)
+                if (Grave2 == null)
                 {
-                    Grave2.GetComponent<Grave>().OwnerSel = Grave.Owner.Player2;
+                    Grave2 = Graves[Random.Range(0, Graves.Count)];
+                    if (Grave2.GetComponent<Grave>().Claimed == false)
+                    {
+                        Grave2.GetComponent<Grave>().OwnerSel = Grave.Owner.Player2;
+                    }
+                    else
+                    {
+                        GM.instance.Grave2 = null;
+                    }
                 }
                 else
                 {
-                    GM.instance.Grave2 = null;
-                }
-            }
-            else
-            {
-                if (Grave2.GetComponent<Grave>().OwnerSel != Grave.Owner.Player2)
-                {
-                    GM.instance.Grave2 = null;
+                    if (Grave2.GetComponent<Grave>().OwnerSel != Grave.Owner.Player2)
+                    {
+                        GM.instance.Grave2 = null;
+                    }
                 }
             }
 
-            if (Grave3 == null)
+            if (PlayerCountSel == PlayerCount.four)
             {
-                Grave3 = Graves[Random.Range(0, Graves.Count)];
-                if (Grave3.GetComponent<Grave>().Claimed == false)
+                if (Grave3 == null)
                 {
-                    Grave3.GetComponent<Grave>().OwnerSel = Grave.Owner.Player3;
+                    Grave3 = Graves[Random.Range(0, Graves.Count)];
+                    if (Grave3.GetComponent<Grave>().Claimed == false)
+                    {
+                        Grave3.GetComponent<Grave>().OwnerSel = Grave.Owner.Player3;
+                    }
+                    else
+                    {
+                        GM.instance.Grave3 = null;
+                    }
                 }
                 else
                 {
-                    GM.instance.Grave3 = null;
-                }
-            }
-            else
-            {
-                if (Grave3.GetComponent<Grave>().OwnerSel != Grave.Owner.Player3)
-                {
-                    GM.instance.Grave3 = null;
+                    if (Grave3.GetComponent<Grave>().OwnerSel != Grave.Owner.Player3)
+                    {
+                        GM.instance.Grave3 = null;
+                    }
                 }
             }
 
@@ -398,7 +487,23 @@ public class GM : MonoBehaviour
                     }
                 }
             }
-            if (Player1Captured && Player2Captured && Player3Captured)
+            if (Player1Captured && PlayerCountSel == PlayerCount.two)
+            {
+                if (!KeeperVictory)
+                {
+                    KeeperVictory = true;
+                    print("The Keeper has won!");
+                }
+            }
+            else if (Player1Captured && Player2Captured && PlayerCountSel == PlayerCount.three)
+            {
+                if (!KeeperVictory)
+                {
+                    KeeperVictory = true;
+                    print("The Keeper has won!");
+                }
+            }
+            else if (Player1Captured && Player2Captured && Player3Captured)
             {
                 if (!KeeperVictory)
                 {
